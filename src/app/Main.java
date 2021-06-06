@@ -59,7 +59,7 @@ public class Main {
   	  	 
   	  	 con.close();
   	  } catch(SQLException e) {
-  	  	   e.printStackTrace();
+  	  	   System.out.println(e.toString());
   	    }
    }
   	  
