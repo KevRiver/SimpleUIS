@@ -35,7 +35,7 @@ public class QueryForm extends GridBagPanel{
 		_title.setAlignmentY(JLabel.CENTER);
 		_title.setForeground(Color.BLACK);
 		int titleAlignment = GridBagConstraints.FIRST_LINE_START;
-		addComponentAtGrid(_title, new Point(0,0), new Dimension(1,1), new Point2D.Double(1.0, 0.1), titleAlignment, false);
+		addComponentAtGrid(_title, new Point(0,0), new Dimension(1,1), new Point2D.Double(1.0, 0.1), titleAlignment, GridBagConstraints.NONE);
 		
 		_submitButton = new JButton("Submit");
 		int buttonWidth = Constants.PRIMARY_FRAME_WIDTH / 13;
@@ -46,7 +46,7 @@ public class QueryForm extends GridBagPanel{
 		_submitButton.setAlignmentY(JButton.CENTER);
 		_submitButton.setForeground(Color.BLACK);
 		int submitButtonAlignment = GridBagConstraints.LINE_END;
-		addComponentAtGrid(_submitButton, new Point(0,1), new Dimension(1,1), new Point2D.Double(0.0, 0.1), submitButtonAlignment, false);
+		addComponentAtGrid(_submitButton, new Point(0,1), new Dimension(1,1), new Point2D.Double(0.0, 0.1), submitButtonAlignment, GridBagConstraints.NONE);
 		
 		_queryStringBuilder = new StringBuilder();
 	}

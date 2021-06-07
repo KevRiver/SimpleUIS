@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 import javax.swing.*;
 
 public class GridBagPanel extends JPanel{
-	private GridBagConstraints _constraints;
+	protected GridBagConstraints _constraints;
 	
 	public GridBagPanel() {
 		super.setLayout(new GridBagLayout());
@@ -14,7 +14,7 @@ public class GridBagPanel extends JPanel{
 		_constraints.insets = new Insets(5,5,0,5);
 	}
 	
-	public void addComponentAtGrid(Component component, Point gridPosition, Dimension size, Point2D.Double sizeRatio, int alignment, boolean fillUpCell) {
+	public void addComponentAtGrid(Component component, Point gridPosition, Dimension size, Point2D.Double sizeRatio, int alignment, int fillPolicy) {
 		try {
 			_constraints.gridx = gridPosition.x;
 			_constraints.gridy = gridPosition.y;
@@ -25,7 +25,7 @@ public class GridBagPanel extends JPanel{
 			_constraints.weightx = sizeRatio.x;
 			_constraints.weighty = sizeRatio.y;
 			
-			_constraints.fill = fillUpCell ? GridBagConstraints.BOTH : GridBagConstraints.NONE;
+			_constraints.fill = fillPolicy;
 			
 			_constraints.anchor = alignment;
 			
