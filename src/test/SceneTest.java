@@ -1,4 +1,4 @@
-package scene.test;
+package test;
 
 import scene.MainScene;
 
