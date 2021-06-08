@@ -1,5 +1,6 @@
 package scene;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,10 @@ protected int _vStrut, _hStrut;
 			add(item);
 			add(Box.createHorizontalStrut(_hStrut));
 		}
+		Dimension minSize = new Dimension(5,0);
+		Dimension prefSize = new Dimension(Constants.PRIMARY_FRAME_WIDTH / 4, 0);
+		Dimension maxSize = new Dimension(Constants.PRIMARY_FRAME_WIDTH / 2, 0);
+		add(new Box.Filler(minSize, prefSize, maxSize));
 	}
 	
 	@Override

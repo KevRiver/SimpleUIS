@@ -13,6 +13,7 @@ public class MainScene extends JFrame implements IScene{
 	private VerticalBoxList _leftPanel;
 	private JButton _backButton;
 	private JPanel _rightPanel;
+	
 	private ArrayList<QueryForm> _queryForms;
 	
 	public MainScene() {
@@ -74,6 +75,7 @@ public class MainScene extends JFrame implements IScene{
 		
 		VerticalBoxList queryFormList = new VerticalBoxList();
 		queryFormList.setCellPadding(0, 10);
+		queryFormList.activateFiller(true);
 		queryFormList.setBackground(Color.BLACK);
 		queryFormList.initListWithItems(queryForms);
 		

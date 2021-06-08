@@ -11,51 +11,44 @@ import java.awt.geom.Point2D.Double;
 import javax.swing.*;
 
 public class QueryForm extends VerticalBoxList{
-	protected JLabel _title;
-	protected JButton _submitButton;
-	protected HorizontalBoxList _paramList;
+	protected String _title;
+	protected String _queryString;
+	protected String _sqlFilePath;
+	protected int _resultTableType;
 	
-	protected List<JTextField> _textFields;
+	protected JLabel _titleLabel;
+	
+	protected HorizontalBoxList _paramList;
 	protected List<String> _paramNames;
+	protected List<JTextField> _textFields;
+	
+	protected JButton _submitButton;
 	
 	protected int _width = 575;
 	protected int _height = 80;
 	
 	public QueryForm() {
-		_paramNames = new ArrayList<>();
-		_paramNames.add("apple");
-		_paramNames.add("banana");
-		_paramNames.add("cat");
-		
-		_textFields = new ArrayList<>();
-		_paramList = new HorizontalBoxList();
-		
-		int paramListWidth = Constants.PRIMARY_FRAME_WIDTH / 10;
-		int paramListHeight = Constants.PRIMARY_FRAME_HEIGHT / 28;
-		_paramList.setPreferredSize(new Dimension(paramListWidth, paramListHeight));
-		
-		this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		this.setPreferredSize(new Dimension(_width, _height));
-		
-		addTitle();
-		addParamForm();
-		addSubmitButton();
-		
-		this.setBackground(Color.WHITE);
+		initList();
+	}
+	
+	public void setTitle(String title) {
+		_title = title;
+	}
+	
+	public void setParamNames(List<String> paramNames) {
+		_paramNames = paramNames;
 	}
 	
 	protected void addTitle() {
-		_title = new JLabel("Title");
+		_titleLabel = new JLabel("Title");
 		int titleWidth = Constants.PRIMARY_FRAME_WIDTH / 10;
 		int titleHeight = Constants.PRIMARY_FRAME_HEIGHT / 20;
-		_title.setPreferredSize(new Dimension(titleWidth, titleHeight));
-		_title.setFont(new Font("Consolas", Font.BOLD, 28));
-		_title.setForeground(Color.BLACK);
+		_titleLabel.setPreferredSize(new Dimension(titleWidth, titleHeight));
+		_titleLabel.setFont(new Font("Consolas", Font.BOLD, 28));
+		_titleLabel.setForeground(Color.BLACK);
 		
-		//_title.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
-		
-		_title.setAlignmentX(LEFT_ALIGNMENT);
-		add(_title);
+		_titleLabel.setAlignmentX(LEFT_ALIGNMENT);
+		add(_titleLabel);
 		add(Box.createVerticalStrut(_vStrut));
 	}
 	
@@ -100,11 +93,6 @@ public class QueryForm extends VerticalBoxList{
 		add(Box.createVerticalStrut(_vStrut));
 	}
 	
-	@Override
-	protected void initList() {
-		
-	}
-	
 	protected void addSubmitButton() {
 		_submitButton = new JButton("Submit");
 		int buttonWidth = Constants.PRIMARY_FRAME_WIDTH / 13;
@@ -116,13 +104,32 @@ public class QueryForm extends VerticalBoxList{
 		_submitButton.setAlignmentX(LEFT_ALIGNMENT);
 		_submitButton.setAlignmentY(JButton.CENTER);
 		_submitButton.setForeground(Color.BLACK);
-		//_submitButton.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
 		
 		add(_submitButton);
 		add(Box.createVerticalStrut(_vStrut));
 	}
 	
-	public void setParamNames(List<String> paramNames) {
-		_paramNames = paramNames;
+	@Override
+	protected void initList() {
+		_title = "Title";
+		
+		_paramNames = new ArrayList<>();
+//		_paramNames.add("fuck");
+//		_paramNames.add("pussy");
+//		_paramNames.add("dick");
+		_textFields = new ArrayList<>();
+		_paramList = new HorizontalBoxList();
+		
+		int paramListWidth = Constants.PRIMARY_FRAME_WIDTH / 20;
+		int paramListHeight = Constants.PRIMARY_FRAME_HEIGHT / 28;
+		_paramList.setPreferredSize(new Dimension(paramListWidth, paramListHeight));
+		
+		this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		this.setPreferredSize(new Dimension(_width, _height));
+		this.setBackground(Color.WHITE);
+		
+		addTitle();
+		addParamForm();
+		addSubmitButton();
 	}
 }
