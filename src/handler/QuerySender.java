@@ -87,7 +87,7 @@ public class QuerySender {
 		_subscribers.clear();
 	}
 	
-	public void executeQueryStringAndBroadcastResult(String queryString, ResultTableType type) {
+	public void executeQueryStringAndBroadcastResult(String queryString, String queryTitle, ResultTableType type) {
 		String errMessage = "";
 		List<Map<String, Object>> resultData = new ArrayList<Map<String, Object>>();
 		try{
@@ -98,7 +98,7 @@ public class QuerySender {
 		}
 		finally {
 			for(var subscriber: _subscribers) {
-				subscriber.onQueryResultCallback(errMessage, resultData, type);
+				subscriber.onQueryResultCallback(errMessage, queryTitle, resultData, type);
 			}
 		}
 	}
@@ -139,10 +139,10 @@ public class QuerySender {
 	public void executeSQLFile(final String sqlFilePath) {
 		try {
 			ScriptRunner sqlScriptRunner = new ScriptRunner(_connection);
-			Reader reader = new BufferedReader(new FileReader(sqlFilePath));
+			Reader reader = new BufferedReader(new InputStreamReader(new FileInputStream(sqlFilePath), "utf-8"));
 			sqlScriptRunner.runScript(reader);
 		}
-		catch(FileNotFoundException e) {
+		catch(FileNotFoundException | UnsupportedEncodingException e) {
 			System.out.println(e.toString());
 		}
 	}

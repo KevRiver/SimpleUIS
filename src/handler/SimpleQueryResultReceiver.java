@@ -23,7 +23,7 @@ public class SimpleQueryResultReceiver implements IQueryResultReceiver{
 	}
 
 	@Override
-	public void onQueryResultCallback(String errMessage, List<Map<String, Object>> resultData, ResultTableType type) {
+	public void onQueryResultCallback(String errMessage, String queryTitle, List<Map<String, Object>> resultData, ResultTableType type) {
 		if(!errMessage.isEmpty()) {
 			System.out.println(errMessage);
 			return;

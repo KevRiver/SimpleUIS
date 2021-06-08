@@ -1,6 +1,8 @@
 package scene;
 
 import java.util.*;
+import java.util.List;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
@@ -8,9 +10,9 @@ import java.awt.geom.Point2D.Double;
 import javax.swing.*;
 
 public class MainScene extends JFrame implements IScene{
-	private GridBagPanel _leftPanel;
+	private VerticalBoxList _leftPanel;
 	private JButton _backButton;
-	private GridBagPanel _rightPanel;
+	private JPanel _rightPanel;
 	private ArrayList<QueryForm> _queryForms;
 	
 	public MainScene() {
@@ -20,7 +22,7 @@ public class MainScene extends JFrame implements IScene{
 		
 		super.setLayout(new GridLayout(1, 2));
 		
-		initLeftPanel();
+		initLeftPanelWithVList();
 		
 		initRightPanel();
 		
@@ -33,22 +35,25 @@ public class MainScene extends JFrame implements IScene{
 		
 		super.setVisible(false);
 	}
-	
-	private void initLeftPanel() {
-		_leftPanel = new GridBagPanel();
-		int panelWidth = Constants.PRIMARY_FRAME_WIDTH / 2;
-		int panelHeight = Constants.PRIMARY_FRAME_HEIGHT;
-		_leftPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
-		_leftPanel.setGridCellPadding(5, 5, 5, 5);
+
+	private void initLeftPanelWithVList() {
+		_leftPanel = new VerticalBoxList();
+		_leftPanel.setCellPadding(5, 5);
+		_leftPanel.setBackground(Color.WHITE);
 		_leftPanel.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 5, Color.BLUE));
 		
-		JButton backButton = new JButton("TestButton");
-		int backButtonWidth = Constants.PRIMARY_FRAME_WIDTH / 10;
-		int backButtonHeight = Constants.PRIMARY_FRAME_HEIGHT / 20;
+		List<JComponent> leftPanelItems = new ArrayList<>();
+		
+		JButton backButton = new JButton("Home");
+		int backBtnFontSize = 12;
+		backButton.setFont(new Font("Consolas", Font.BOLD, backBtnFontSize));
+		backButton.setOpaque(true);
+		backButton.setBackground(Color.WHITE);
+		backButton.setForeground(Color.BLACK);
+		int backButtonWidth = Constants.PRIMARY_FRAME_WIDTH / 32;
+		int backButtonHeight = Constants.PRIMARY_FRAME_HEIGHT / 24;
 		backButton.setPreferredSize(new Dimension(backButtonWidth, backButtonHeight));
-		backButton.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 4, false));
-		int backButtonAlignment = GridBagConstraints.FIRST_LINE_START;
-		_leftPanel.addComponentAtGrid(backButton, new Point(0, 0), new Dimension(1,1), new Point2D.Double(1.0, 0.0), backButtonAlignment, GridBagConstraints.NONE);
+		leftPanelItems.add(backButton);
 		
 		JLabel leftTitle = new JLabel("Query Forms");
 		int leftTitleWidth = Constants.PRIMARY_FRAME_WIDTH / 4;
@@ -57,30 +62,31 @@ public class MainScene extends JFrame implements IScene{
 		int fontSize = 32;
 		leftTitle.setFont(new Font("Verdana", Font.BOLD, fontSize));
 		leftTitle.setForeground(Color.BLACK);
-		leftTitle.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-		int leftTitleAlignment = GridBagConstraints.LAST_LINE_START;
-		_leftPanel.addComponentAtGrid(leftTitle, new Point(0, 1), new Dimension(1, 1), new Point2D.Double(1.0, 0.0), leftTitleAlignment, GridBagConstraints.NONE);
+		leftTitle.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
-		GridBagList testListPanel = new GridBagList();
-		ArrayList<JComponent> queryForms = new ArrayList<>();
-		for(int i = 0; i < 8; i++) {
+		leftPanelItems.add(leftTitle);
+		
+		
+		List<JComponent> queryForms = new ArrayList<>();
+		for(int i = 0; i < 5; i++) {
 			queryForms.add(new QueryForm());
 		}
-		testListPanel.setBackground(Color.BLACK);
-		testListPanel.setItems(queryForms);
+		
+		VerticalBoxList queryFormList = new VerticalBoxList();
+		queryFormList.setCellPadding(0, 10);
+		queryFormList.setBackground(Color.BLACK);
+		queryFormList.initListWithItems(queryForms);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		int scrollPaneWidth = Constants.PRIMARY_FRAME_WIDTH / 2 - 32;
-		int scrollPaneHeight = 550;
+		int scrollPaneWidth = Constants.PRIMARY_FRAME_WIDTH / 2 - 55;
+		int scrollPaneHeight = 565;
 		scrollPane.setPreferredSize(new Dimension(scrollPaneWidth, scrollPaneHeight));
-		scrollPane.setViewportView(testListPanel);
+		scrollPane.setViewportView(queryFormList);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		int scrollPaneAlignment = GridBagConstraints.FIRST_LINE_START;
-		_leftPanel.addComponentAtGrid(scrollPane, new Point(0, 2), new Dimension(1,1), new Point2D.Double(1.0, 1.0), scrollPaneAlignment, GridBagConstraints.VERTICAL);
+		leftPanelItems.add(scrollPane);
 		
-		_leftPanel.revalidate();
-		_leftPanel.repaint();
+		_leftPanel.initListWithItems(leftPanelItems);
 	}
 	
 	private void initRightPanel() {
@@ -88,7 +94,7 @@ public class MainScene extends JFrame implements IScene{
 		int panelWidth = Constants.PRIMARY_FRAME_WIDTH / 2;
 		int panelHeight = Constants.PRIMARY_FRAME_HEIGHT;
 		_rightPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
-		_rightPanel.setGridCellPadding(5, 5, 5, 5);
+		((GridBagPanel)_rightPanel).setGridCellPadding(5, 5, 5, 5);
 		_rightPanel.setBorder(BorderFactory.createMatteBorder(10, 5, 10, 10, Color.BLUE));
 		
 		JLabel rightTitle = new JLabel("Results");
@@ -100,7 +106,7 @@ public class MainScene extends JFrame implements IScene{
 		rightTitle.setForeground(Color.BLACK);
 		rightTitle.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 		int alignment = GridBagConstraints.LAST_LINE_START;
-		_rightPanel.addComponentAtGrid(rightTitle, new Point(0, 0), new Dimension(1, 1), new Point2D.Double(1.0, 0.0), alignment, GridBagConstraints.NONE);
+		((GridBagPanel)_rightPanel).addComponentAtGrid(rightTitle, new Point(0, 0), new Dimension(1, 1), new Point2D.Double(1.0, 0.0), alignment, GridBagConstraints.NONE);
 		
 		JPanel testPanel = new JPanel();
 		testPanel.setBackground(Color.BLACK);
@@ -112,7 +118,7 @@ public class MainScene extends JFrame implements IScene{
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		int scrollPaneAlignment = GridBagConstraints.FIRST_LINE_START;
-		_rightPanel.addComponentAtGrid(scrollPane, new Point(0, 1), new Dimension(1,1), new Point2D.Double(1.0, 1.0), scrollPaneAlignment, GridBagConstraints.VERTICAL);
+		((GridBagPanel)_rightPanel).addComponentAtGrid(scrollPane, new Point(0, 1), new Dimension(1,1), new Point2D.Double(1.0, 1.0), scrollPaneAlignment, GridBagConstraints.VERTICAL);
 	}
 	@Override
 	public void displayScene() {
