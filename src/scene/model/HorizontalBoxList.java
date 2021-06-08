@@ -1,9 +1,12 @@
-package scene;
+package scene.model;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+
+import scene.Constants;
 
 public class HorizontalBoxList extends BoxList{
 protected int _vStrut, _hStrut;
@@ -33,10 +36,22 @@ protected int _vStrut, _hStrut;
 			add(item);
 			add(Box.createHorizontalStrut(_hStrut));
 		}
+		if(_activateFiller){
+			Dimension minSize = new Dimension(5,0);
+			Dimension prefSize = new Dimension(Constants.PRIMARY_FRAME_WIDTH / 4, 0);
+			Dimension maxSize = new Dimension(Constants.PRIMARY_FRAME_WIDTH / 2, 0);
+			add(new Box.Filler(minSize, prefSize, maxSize));
+		}
 	}
 	
 	@Override
 	protected void initList() {
+		
+	}
+
+	@Override
+	public void removeItem(JComponent forRemove) {
+		// TODO Auto-generated method stub
 		
 	}
 	

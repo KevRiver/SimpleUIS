@@ -1,7 +1,6 @@
 package test;
 
-import handler.QuerySender;
-import handler.SimpleQueryResultReceiver;
+import query.sender.QuerySender;
 
 public class RunSQLScriptTest {
 
