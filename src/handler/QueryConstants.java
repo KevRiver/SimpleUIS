@@ -217,4 +217,16 @@ public class QueryConstants {
 		
 		return query.toString();
 	}
+	
+	// 학기당 수강학점 10학점 제한을 위해 수강내역에 있는 총 학점을 구함
+	/*
+	 * SELECT SUM(courseGradeNumber) FROM Course WHERE courseNumber IN
+(SELECT Course_courseNumber FROM CourseHistory WHERE Student_studentNumber = 1 AND year = 2021 AND univSemester = 1);
+	 * */
+	public static final String getAllGradeNumber(int studentNumber, int year, int univSemester) {
+		StringBuilder query = new StringBuilder("SELECT SUM(courseGradeNumber) FROM Course WHERE courseNumber IN");
+		query.append(String.format(" (SELECT Course_courseNumber FROM CourseHistory WHERE Student_studentNumber = %d AND year = %d AND univSemester = %d);",
+				studentNumber, year, univSemester));
+		return query.toString();
+	}
 }
