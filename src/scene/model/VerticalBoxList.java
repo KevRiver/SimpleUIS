@@ -48,6 +48,9 @@ public class VerticalBoxList extends BoxList{
 			Dimension maxSize = new Dimension(0, Constants.PRIMARY_FRAME_HEIGHT / 2);
 			add(new Box.Filler(minSize, prefSize, maxSize));
 		}
+		
+		revalidate();
+		repaint();
 	}
 	
 	public void addItem(JComponent c) {
@@ -57,8 +60,7 @@ public class VerticalBoxList extends BoxList{
 		
 		initListWithItems(_items);
 		
-		revalidate();
-		repaint();
+		
 	}
 	
 	@Override
@@ -74,6 +76,7 @@ public class VerticalBoxList extends BoxList{
 	}
 	
 	public void removeAllItemsAndRefresh() {
+		_items.clear();
 		this.removeAll();
 		
 		initListWithItems(_items);

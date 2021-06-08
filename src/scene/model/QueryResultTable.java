@@ -14,7 +14,7 @@ public class QueryResultTable extends VerticalBoxList{
 	final int labelWidth = Constants.PRIMARY_FRAME_WIDTH / 20;
 	final int labelHeight = Constants.PRIMARY_FRAME_HEIGHT / 28;
 	final int labelFontSize = 12;
-	final Font labelFont = new Font("Consolas", Font.BOLD, labelFontSize);
+	final Font labelFont = new Font("µ∏øÚ", Font.BOLD, labelFontSize);
 	
 	public QueryResultTable() {	
 		_items = new ArrayList<>();
@@ -75,7 +75,7 @@ public class QueryResultTable extends VerticalBoxList{
 				Object data = results.get(i).get(columnKey);
 				JLabel columnValue = new JLabel(data.toString());
 				columnValue.setPreferredSize(new Dimension(labelWidth, labelHeight));
-				columnValue.setFont(labelFont);
+				columnValue.setFont(new Font(columnValue.getFont().getName(), columnValue.getFont().getStyle(), 12));//new Font("πŸ≈¡√º", Font.BOLD, labelFontSize));
 				columnValue.setForeground(Color.WHITE);
 				columnValue.setHorizontalAlignment(JLabel.CENTER);
 				rowEntities.add(columnValue);

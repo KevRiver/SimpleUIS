@@ -15,9 +15,6 @@ public class QueryResultTab extends VerticalBoxList {
 	private QueryResultTable _resultTable;
 	
 	public QueryResultTab(String errMessage, String title, List<Map<String, Object>> results, ResultTableType type) {
-		_closeButton = new CloseButton((VerticalBoxList)((JComponent)this).getParent(), (JComponent)this);
-		_items.add(_closeButton);
-		
 		_titleLabel = new JLabel(title);
 		_titleLabel.setForeground(Color.BLACK);
 		_items.add(_titleLabel);

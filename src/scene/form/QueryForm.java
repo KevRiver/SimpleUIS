@@ -5,6 +5,8 @@ import java.util.*;
 import java.util.List;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.*;
 import java.awt.geom.Point2D.Double;
 
@@ -31,8 +33,44 @@ public class QueryForm extends VerticalBoxList{
 	protected int _width = 575;
 	protected int _height = 80;
 	
+	class SubmitActionListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if((JButton)e.getSource() == _submitButton) {
+				sendQuery();
+			}
+		}
+	}
+	
+	protected void sendQuery() {
+		
+	}
+	
 	public QueryForm() {
-		initList();
+		//initList();
+	}
+	
+	@Override
+	protected void initList() {
+		_title = "Title";
+		
+		_paramNames = new ArrayList<>();
+		_textFields = new ArrayList<>();
+		_paramList = new HorizontalBoxList();
+		_paramList.activateFiller(true);
+		
+		int paramListWidth = Constants.PRIMARY_FRAME_WIDTH / 20;
+		int paramListHeight = Constants.PRIMARY_FRAME_HEIGHT / 28;
+		_paramList.setPreferredSize(new Dimension(paramListWidth, paramListHeight));
+		
+		this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		this.setPreferredSize(new Dimension(_width, _height));
+		this.setBackground(Color.WHITE);
+		
+		addTitle();
+		addParamForm();
+		addSubmitButton();
 	}
 	
 	public void setTitle(String title) {
@@ -44,7 +82,7 @@ public class QueryForm extends VerticalBoxList{
 	}
 	
 	protected void addTitle() {
-		_titleLabel = new JLabel("Title");
+		_titleLabel = new JLabel(_title);
 		int titleWidth = Constants.PRIMARY_FRAME_WIDTH / 10;
 		int titleHeight = Constants.PRIMARY_FRAME_HEIGHT / 20;
 		_titleLabel.setPreferredSize(new Dimension(titleWidth, titleHeight));
@@ -90,8 +128,6 @@ public class QueryForm extends VerticalBoxList{
 		
 		_paramList.initListWithItems(params);
 		
-		//_paramList.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
-		
 		_paramList.setAlignmentX(LEFT_ALIGNMENT);
 		this.add(_paramList);
 		add(Box.createVerticalStrut(_vStrut));
@@ -108,32 +144,12 @@ public class QueryForm extends VerticalBoxList{
 		_submitButton.setAlignmentX(LEFT_ALIGNMENT);
 		_submitButton.setAlignmentY(JButton.CENTER);
 		_submitButton.setForeground(Color.BLACK);
-		
+		_submitButton.addActionListener(new SubmitActionListener());
 		add(_submitButton);
 		add(Box.createVerticalStrut(_vStrut));
 	}
 	
-	@Override
-	protected void initList() {
-		_title = "Title";
-		
-		_paramNames = new ArrayList<>();
-//		_paramNames.add("fuck");
-//		_paramNames.add("pussy");
-//		_paramNames.add("dick");
-		_textFields = new ArrayList<>();
-		_paramList = new HorizontalBoxList();
-		
-		int paramListWidth = Constants.PRIMARY_FRAME_WIDTH / 20;
-		int paramListHeight = Constants.PRIMARY_FRAME_HEIGHT / 28;
-		_paramList.setPreferredSize(new Dimension(paramListWidth, paramListHeight));
-		
-		this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		this.setPreferredSize(new Dimension(_width, _height));
-		this.setBackground(Color.WHITE);
-		
-		addTitle();
-		addParamForm();
-		addSubmitButton();
-	}
+	
+
+	
 }

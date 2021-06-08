@@ -10,7 +10,7 @@ public class SceneTest {
 	public static void main(String[] args) {
 		MainScene testScene = new MainScene();
 		testScene.displayScene();
-		QuerySender.getInstance().executeQueryStringAndBroadcastResult(QueryConstants.selectTable("Professor"), "Show Table",ResultTableType.TABLE);
+		//QuerySender.getInstance().executeQueryStringAndBroadcastResult(QueryConstants.selectTable("Professor"), "Show Table",ResultTableType.TABLE);
 	}
 
 }
