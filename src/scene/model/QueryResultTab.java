@@ -1,5 +1,6 @@
 package scene.model;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -15,10 +16,10 @@ public class QueryResultTab extends VerticalBoxList {
 	
 	public QueryResultTab(String errMessage, String title, List<Map<String, Object>> results, ResultTableType type) {
 		_closeButton = new CloseButton((VerticalBoxList)((JComponent)this).getParent(), (JComponent)this);
-				
 		_items.add(_closeButton);
 		
 		_titleLabel = new JLabel(title);
+		_titleLabel.setForeground(Color.BLACK);
 		_items.add(_titleLabel);
 		
 		if(!errMessage.isEmpty()) {
@@ -36,7 +37,9 @@ public class QueryResultTab extends VerticalBoxList {
 			}
 		}
 		
-		
+		initListWithItems(_items);
+		setOpaque(true);
+		setBackground(Color.WHITE);
 	}
 	
 	

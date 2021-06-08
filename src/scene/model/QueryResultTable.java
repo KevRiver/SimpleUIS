@@ -1,5 +1,6 @@
 package scene.model;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.*;
@@ -10,9 +11,9 @@ import javax.swing.*;
 import scene.Constants;
 
 public class QueryResultTable extends VerticalBoxList{
-	final int labelWidth = Constants.PRIMARY_FRAME_WIDTH / 24;
+	final int labelWidth = Constants.PRIMARY_FRAME_WIDTH / 20;
 	final int labelHeight = Constants.PRIMARY_FRAME_HEIGHT / 28;
-	final int labelFontSize = 10;
+	final int labelFontSize = 12;
 	final Font labelFont = new Font("Consolas", Font.BOLD, labelFontSize);
 	
 	public QueryResultTable() {	
@@ -60,6 +61,7 @@ public class QueryResultTable extends VerticalBoxList{
 			JLabel columnLabel = new JLabel(columnKey);
 			columnLabel.setPreferredSize(new Dimension(labelWidth, labelHeight));
 			columnLabel.setFont(labelFont);
+			columnLabel.setForeground(Color.WHITE);
 			columnLabel.setHorizontalAlignment(JLabel.CENTER);
 			firstRowEntities.add(columnLabel);
 		} // create first row entities
@@ -74,6 +76,7 @@ public class QueryResultTable extends VerticalBoxList{
 				JLabel columnValue = new JLabel(data.toString());
 				columnValue.setPreferredSize(new Dimension(labelWidth, labelHeight));
 				columnValue.setFont(labelFont);
+				columnValue.setForeground(Color.WHITE);
 				columnValue.setHorizontalAlignment(JLabel.CENTER);
 				rowEntities.add(columnValue);
 			}

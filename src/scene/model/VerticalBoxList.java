@@ -73,6 +73,15 @@ public class VerticalBoxList extends BoxList{
 		repaint();
 	}
 	
+	public void removeAllItemsAndRefresh() {
+		this.removeAll();
+		
+		initListWithItems(_items);
+		
+		revalidate();
+		repaint();
+	}
+	
 	public void setCellPadding(int hStrut, int vStrut) {
 		_vStrut = vStrut;
 		_hStrut = hStrut;
