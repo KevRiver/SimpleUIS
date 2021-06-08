@@ -9,10 +9,14 @@ import java.awt.geom.Point2D.Double;
 
 import javax.swing.*;
 
+import scene.form.QueryForm;
+import scene.model.QueryResultBoard;
+import scene.model.VerticalBoxList;
+
 public class MainScene extends JFrame implements IScene{
 	private VerticalBoxList _leftPanel;
 	private JButton _backButton;
-	private JPanel _rightPanel;
+	private VerticalBoxList _rightPanel;
 	
 	private ArrayList<QueryForm> _queryForms;
 	
@@ -92,14 +96,14 @@ public class MainScene extends JFrame implements IScene{
 	}
 	
 	private void initRightPanel() {
-		_rightPanel = new GridBagPanel();
-		int panelWidth = Constants.PRIMARY_FRAME_WIDTH / 2;
-		int panelHeight = Constants.PRIMARY_FRAME_HEIGHT;
-		_rightPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
-		((GridBagPanel)_rightPanel).setGridCellPadding(5, 5, 5, 5);
-		_rightPanel.setBorder(BorderFactory.createMatteBorder(10, 5, 10, 10, Color.BLUE));
+		_rightPanel = new VerticalBoxList();
+		_rightPanel.setCellPadding(5, 5);
+		_rightPanel.setBackground(Color.WHITE);
+		_rightPanel.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 5, Color.BLUE));
 		
-		JLabel rightTitle = new JLabel("Results");
+		List<JComponent> rightPanelItems = new ArrayList<>();
+		
+		JLabel rightTitle = new JLabel("Results Board");
 		int width = Constants.PRIMARY_FRAME_WIDTH / 4;
 		int height = Constants.PRIMARY_FRAME_HEIGHT / 20;
 		rightTitle.setPreferredSize(new Dimension(width, height));
@@ -107,20 +111,22 @@ public class MainScene extends JFrame implements IScene{
 		rightTitle.setFont(new Font("Verdana", Font.BOLD, fontSize));
 		rightTitle.setForeground(Color.BLACK);
 		rightTitle.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-		int alignment = GridBagConstraints.LAST_LINE_START;
-		((GridBagPanel)_rightPanel).addComponentAtGrid(rightTitle, new Point(0, 0), new Dimension(1, 1), new Point2D.Double(1.0, 0.0), alignment, GridBagConstraints.NONE);
 		
-		JPanel testPanel = new JPanel();
-		testPanel.setBackground(Color.BLACK);
+		rightPanelItems.add(rightTitle);
 		
-		JScrollPane scrollPane = new JScrollPane(testPanel);
+		QueryResultBoard board = new QueryResultBoard();
+		board.setOpaque(true);
+		board.setBackground(Color.BLACK);
+		
+		JScrollPane scrollPane = new JScrollPane(board);
 		int scrollPaneWidth = Constants.PRIMARY_FRAME_WIDTH / 2 - 32;
 		int scrollPaneHeight = 550;
 		scrollPane.setPreferredSize(new Dimension(scrollPaneWidth, scrollPaneHeight));
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		int scrollPaneAlignment = GridBagConstraints.FIRST_LINE_START;
-		((GridBagPanel)_rightPanel).addComponentAtGrid(scrollPane, new Point(0, 1), new Dimension(1,1), new Point2D.Double(1.0, 1.0), scrollPaneAlignment, GridBagConstraints.VERTICAL);
+		rightPanelItems.add(scrollPane);
+		
+		_rightPanel.initListWithItems(rightPanelItems);
 	}
 	@Override
 	public void displayScene() {

@@ -1,13 +1,15 @@
-package scene;
+package scene.model;
 
 import java.util.*;
 import java.util.List;
 import java.awt.*;
 import javax.swing.*;
 
+import scene.Constants;
+
 public class VerticalBoxList extends BoxList{
 	protected int _vStrut, _hStrut;
-	protected boolean _activateFiller;
+	
 	public VerticalBoxList() {
 		super(BoxLayout.Y_AXIS);
 		this.setBackground(Color.BLACK);
@@ -48,12 +50,33 @@ public class VerticalBoxList extends BoxList{
 		}
 	}
 	
+	public void addItem(JComponent c) {
+		_items.add(c);
+		
+		this.removeAll();
+		
+		initListWithItems(_items);
+		
+		revalidate();
+		repaint();
+	}
+	
+	@Override
+	public void removeItem(JComponent c) {
+		_items.remove(c);
+		
+		this.removeAll();
+		
+		initListWithItems(_items);
+		
+		revalidate();
+		repaint();
+	}
+	
 	public void setCellPadding(int hStrut, int vStrut) {
 		_vStrut = vStrut;
 		_hStrut = hStrut;
 	}
 	
-	public void activateFiller(boolean isActive) {
-		_activateFiller = isActive;
-	}
+	
 }

@@ -1,4 +1,4 @@
-package handler;
+package qeury.result.mapper;
 
 import java.util.*;
 

@@ -1,8 +1,12 @@
 package test;
 
 import java.util.*;
+
+import qeury.result.mapper.*;
+
 import java.sql.*;
-import handler.*;
+
+import query.sender.QuerySender;
 
 public class QuerySenderTest {
 	

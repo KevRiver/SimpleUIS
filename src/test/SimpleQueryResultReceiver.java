@@ -1,7 +1,12 @@
-package handler;
+package test;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import query.receiver.IQueryResultReceiver;
+import query.sender.QuerySender;
+import scene.model.ResultTableType;
+
 import java.sql.*;
 
 public class SimpleQueryResultReceiver implements IQueryResultReceiver{

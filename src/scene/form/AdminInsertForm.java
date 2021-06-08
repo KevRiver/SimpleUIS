@@ -1,4 +1,4 @@
-package scene;
+package scene.form;
 
 public class AdminInsertForm extends QueryForm{
 	private String queryFormat = "";

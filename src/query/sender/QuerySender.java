@@ -1,4 +1,4 @@
-package handler;
+package query.sender;
 
 import java.io.*;
 import java.lang.*;
@@ -6,6 +6,9 @@ import java.util.*;
 import java.sql.*;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
+
+import query.receiver.IQueryResultReceiver;
+import scene.model.ResultTableType;
 
 
 

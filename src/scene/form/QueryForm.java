@@ -1,4 +1,4 @@
-package scene;
+package scene.form;
 
 import java.lang.*;
 import java.util.*;
@@ -9,6 +9,10 @@ import java.awt.geom.*;
 import java.awt.geom.Point2D.Double;
 
 import javax.swing.*;
+
+import scene.Constants;
+import scene.model.HorizontalBoxList;
+import scene.model.VerticalBoxList;
 
 public class QueryForm extends VerticalBoxList{
 	protected String _title;
