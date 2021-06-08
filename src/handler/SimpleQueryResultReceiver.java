@@ -44,7 +44,10 @@ public class SimpleQueryResultReceiver implements IQueryResultReceiver{
 		for(int i = 1; i < rowCount; i++) {
 			for(var columnName: columnNames) {
 				Object data = resultData.get(i).get(columnName);
-				System.out.print(data.toString() + "\t");
+				if (data == null)
+					System.out.print("" + "\t");
+				else
+					System.out.print(data.toString() + "\t");
 			}
 			System.out.print("\n");
 		}

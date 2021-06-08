@@ -147,4 +147,15 @@ public class QuerySender {
 		}
 	}
 	
+	public void executeQueryString(String queryString) throws SQLException{
+		try {
+			Statement statement = _connection.createStatement();
+	        statement.executeUpdate(queryString);
+		}
+		catch(SQLException e) {
+			System.out.println(e.toString());
+	        throw e;
+		}
+	}
+	
 }
